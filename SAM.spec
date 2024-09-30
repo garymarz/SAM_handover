@@ -8,7 +8,7 @@ block_cipher = None
 
 
 a = Analysis(
-    ['D:\\SAM\\SAM_autolabel.py'],
+    ['D:\\SAM\\SAM.py'],
     pathex=[],
     binaries=[],
     datas=datas,
@@ -49,5 +49,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='SAM_autolabel',
+    name='SAM',
 )
