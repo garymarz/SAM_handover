@@ -20,19 +20,19 @@ import threading
 
 global args_output
 # np.set_printoptions(threshold=np.inf)
-# d:\sam\sam.exe d:\Models\CF5\123\*.pth d:\Models\CF5\123\input\ d:\Models\CF5\123\output 0
+# d:\sam\sam.exe d:\Models\123\*.pth d:\Models\123\input\ d:\Models\123\output 0
 # pip install https://github.com/pyinstaller/pyinstaller/tarball/develop
 # log -> log 寫在 model資料夾下
 # input a.txt -> box, x1,y1,....xn,yn
 # text l v h 模型 memery 占用大小
 
 # Input
-# txt \\10.91.45.57\DLADJloader$\INK\Input\image\CF5_INRE05_20230420101858_REPR.png,279,331,165,234,168,178  x1, y1, x2, y2 中心點記得算
+# txt 001.png,279,331,165,234,168,178  x1, y1, x2, y2 中心點記得算
 # Out 
-# \\10.91.45.57\DLADJloader$\INK\Input\image\CF5_INRE05_20230420101858_REPR.png,100%,365,404,304,340
+# \\001.png,100%,365,404,304,340
 
-# 原 IMAGE: CF5_INRE05_20230420101858_REPR.png
-# MASK IMAGE: CF5_INRE05_20230420101858_REPR_contour.png
+# 原 IMAGE: 001.png
+# MASK IMAGE: 001_contour.png
 
 def model_predictor(model_type, checkpoint, device, img_path='test.png'):
     '''Define segmentation model. "Predictor" for single mask.  "Mask_generator" for anything.'''
@@ -79,24 +79,17 @@ def show_defect(masks, input_box, output_dir):
     dir_path = output_dir
     url = []
     for i, j in enumerate(masks):
-        # print(input_box[i])
-        # name = "{}_{}_{}_{}.png".format(int(input_box[i][0]),int(input_box[i][2]),int(input_box[i][1]),int(input_box[i][3])) # 以box為名稱
-        # http_path = "http://{}/".format(path)
-        # \\\\169.254.82.11\\sam_api\\sam_output\\{shop}_{formattedDateTime}.json
+
         name0 = "{}_{}_{}_{}.png".format(int(input_box[i][0]),int(input_box[i][2]),int(input_box[i][1]),int(input_box[i][3]))
         name1 = "/Uploads/{}_{}_{}_{}.png".format(int(input_box[i][0]),int(input_box[i][2]),int(input_box[i][1]),int(input_box[i][3]))
         output_dir = os.path.join(dir_path,name0)
-        
-        #name1 = '/'+output_dir.split('\\')[-2]+'/'+output_dir.split('\\')[-1]
+
         colors = np.array([255,255,255])
         color = np.array([int(k) for k in colors],dtype=np.uint8)  
         mask = j[0]
         h, w = mask.shape[-2:]
         mask_image = mask.reshape(h, w, 1) * color.reshape(1, 1, -1)
-        # if i==0:
-        #     masks = mask_image
-        # else:
-        #     masks = cv2.addWeighted(masks, 1, mask_image, 0.7, 0)
+)
         if np.sum(mask_image)>0:
             cv2.imwrite(output_dir, mask_image)
             url.append(name1)
@@ -344,20 +337,7 @@ if __name__ == '__main__':
     checkpoint = args.checkpoint
     model_type = checkpoint.split('\\')[-1].split('.')[0]
     #torch.cuda.set_per_process_memory_fraction(float(args.cuda_capacity), int(device[-1])) # only can use 70% GPU memery
-    # urlss = {  'FAB1':r'http://p1cimweb.cminl.oa/ApiGateway/SamApi/Uploads/',
-    #            'FAB2':r'http://p2cimweb.cminl.oa/ApiGateway/SamApi/Uploads/',
-    #            'FAB3':r'http://p3cimweb.cminl.oa/ApiGateway/SamApi/Uploads/',
-    #            'FAB4':r'http://p4cimweb.cminl.oa/ApiGateway/SamApi/Uploads/',
-    #            'FAB5':r'http://p5cimweb.cminl.oa/ApiGateway/SamApi/Uploads/',
-    #            'FAB6':r'http://p6cimweb.cminl.oa/ApiGateway/SamApi/Uploads/',
-    #            'FAB7':r'http://p7cimweb.cminl.oa/ApiGateway/SamApi/Uploads/',
-    #            'FAB8':r'http://p8cimweb.cminl.oa/ApiGateway/SamApi/Uploads/',
-    #            'T6'  :r'http://plcimweb.cminl.oa/ApiGateway/SamApi/Uploads/',
-    #            'OA'  :r'http://tncimweb.cminl.oa/ApiGateway/SamApi/Uploads/'
-    #         }
                
-
-
     f_name = str(datetime.date.today())
     log_Path = os.path.dirname(input_dir)
     log_ = check_tmp(log_Path,'log')
