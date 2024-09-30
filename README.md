@@ -16,7 +16,7 @@ pip install -e .
 Here we take vit_l as an example. You can use vit_B or vit_h according to your personal needs.    
 `vit_l` [ViT-L SAM model](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth)    
 `vit_b` [ViT-B SAM model](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth)    
-`vit_h` [ViT-H SAM model](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth)
+`vit_h` [ViT-H SAM model](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth)     
 `sam_pb4` [finetuned SAM model](https://drive.google.com/file/d/1QRzQYCeZ2nCjbQcvarDf6KHJtHDMbuLW/view?usp=sharing)
      
 # Training    
