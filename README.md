@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/5d1dd5dd-d750-4753-afa8-65908da51f25)# SAM
+# SAM
 This is a demo fine-tune Segmentanything with Multiple GPUs. This case was trained on three GPUs and use `nn.DataParallel`.
 # Installation
 The code requires `python>=3.8`, as well as `pytorch>=1.7` and `torchvision>=0.8`.
